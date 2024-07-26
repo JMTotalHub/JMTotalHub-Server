@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  express:
+    image: junmop950/jm-total-hub:express-latest
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: ${EXPRESS_SERVER01_DATABASE_URL}
+      REDIS_URL: ${EXPRESS_SERVER01_REDIS_URL}
+      REDIS_PORT: ${EXPRESS_SERVER01_REDIS_PORT}
+      REDIS_PASSWORD: ${EXPRESS_SERVER01_REDIS_PASSWORD}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY01}
+      JWT_ACCESS_TOKEN_EXPIRATION: ${JWT_ACCESS_TOKEN_EXPIRATION}
+      JWT_REFRESH_TOKEN_EXPIRATION: ${JWT_REFRESH_TOKEN_EXPIRATION}
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass ${EXPRESS_SERVER01_REDIS_PASSWORD}
+    environment:
+      REDIS_PASSWORD: ${EXPRESS_SERVER01_REDIS_PASSWORD}

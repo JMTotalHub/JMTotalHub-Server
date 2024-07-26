@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  react:
+    image: junmop950/jm-total-hub:react-latest
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_ENV_STATUS: ${REACT_ENV_STATUS}
+      EXPRESS_SERVER01_EC2_HOST: ${EXPRESS_SERVER01_EC2_HOST}
