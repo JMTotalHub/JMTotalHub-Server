@@ -13,20 +13,27 @@ jobs:
       - name: 코드 체크아웃
         uses: actions/checkout@v2
 
+      - name: 환경 변수 로드
+        id: load-env
+        run: |
+          echo "${{ secrets.EXPRESS_SERVER01_ENV }}" | while IFS= read -r line; do
+            echo "$line" >> $GITHUB_ENV
+          done
+
       - name: express 폴더 생성(있으면 무시)
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.EXPRESS_SERVER01_EC2_HOST }}
-          username: ${{ secrets.EXPRESS_SERVER01_EC2_USERNAME }}
-          key: ${{ secrets.EXPRESS_SERVER01_EC2_PRIVATE_KEY }}
+          host: ${{ env.EXPRESS_SERVER01_EC2_HOST }}
+          username: ${{ env.EXPRESS_SERVER01_EC2_USERNAME }}
+          key: ${{ env.EXPRESS_SERVER01_EC2_PRIVATE_KEY }}
           script: |
             mkdir -p ~/express
 
       - name: express폴더내용 ec2서버 express폴더에 업로드 (최신화)
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.EXPRESS_SERVER01_EC2_HOST }}
-          username: ${{ secrets.EXPRESS_SERVER01_EC2_USERNAME }}
-          key: ${{ secrets.EXPRESS_SERVER01_EC2_PRIVATE_KEY }}
+          host: ${{ env.EXPRESS_SERVER01_EC2_HOST }}
+          username: ${{ env.EXPRESS_SERVER01_EC2_USERNAME }}
+          key: ${{ env.EXPRESS_SERVER01_EC2_PRIVATE_KEY }}
           source: "express/*"
-          target: "~/express/"
+          target: "~/"
