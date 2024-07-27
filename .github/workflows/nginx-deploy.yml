@@ -22,6 +22,14 @@ jobs:
               echo "$line" >> $GITHUB_ENV
             fi
           done
+      - name: 환경 변수 출력 (디버그 용도)
+        run: |
+          echo "REACT_SERVER01_EC2_PROTOCOL=${{ env.REACT_SERVER01_EC2_PROTOCOL }}"
+          echo "REACT_SERVER01_EC2_HOST=${{ env.REACT_SERVER01_EC2_HOST }}"
+          echo "REACT_SERVER01_EC2_PORT=${{ env.REACT_SERVER01_EC2_PORT }}"
+          echo "EXPRESS_SERVER01_EC2_PROTOCOL=${{ env.EXPRESS_SERVER01_EC2_PROTOCOL }}"
+          echo "EXPRESS_SERVER01_EC2_HOST=${{ env.EXPRESS_SERVER01_EC2_HOST }}"
+          echo "EXPRESS_SERVER01_EC2_PORT=${{ env.EXPRESS_SERVER01_EC2_PORT }}"
 
       - name: nginx 폴더 생성(있으면 무시)
         uses: appleboy/ssh-action@master
