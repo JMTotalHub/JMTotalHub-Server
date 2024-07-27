@@ -12,6 +12,8 @@ services:
       JWT_SECRET_KEY: ${JWT_SECRET_KEY01}
       JWT_ACCESS_TOKEN_EXPIRATION: ${JWT_ACCESS_TOKEN_EXPIRATION}
       JWT_REFRESH_TOKEN_EXPIRATION: ${JWT_REFRESH_TOKEN_EXPIRATION}
+    depends_on:
+      - redis
   redis:
     image: redis:latest
     ports:
