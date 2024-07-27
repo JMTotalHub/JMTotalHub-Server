@@ -28,6 +28,7 @@ jobs:
         with:
           host: ${{ secrets.EXPRESS_SERVER01_EC2_HOST }}
           username: ${{ secrets.EXPRESS_SERVER01_EC2_USERNAME }}
-          key: ${{ secrets.EXPRESS_SERVER01_EC2_PRIVATE_KEY }}
+          key: |
+            ${{ secrets.EXPRESS_SERVER01_EC2_PRIVATE_KEY }}
           source: "express/*"
           target: "~/express/"
