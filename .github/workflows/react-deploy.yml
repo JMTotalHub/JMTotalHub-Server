@@ -13,11 +13,21 @@ jobs:
       - name: 코드 체크아웃
         uses: actions/checkout@v2
 
+      - name: 환경 변수 로드
+        id: load-env
+        run: |
+          echo "${{ secrets.REACT_SERVER01_ENV }}" | while IFS= read -r line; do
+            # 주석과 빈 줄 무시
+            if [[ -n "$line" && "$line" != \#* ]]; then
+              echo "$line" >> $GITHUB_ENV
+            fi
+          done
+
       - name: react 폴더 생성(있으면 무시)
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.REACT_SERVER01_EC2_HOST }}
-          username: ${{ secrets.REACT_SERVER01_EC2_USERNAME }}
+          host: ${{ env.REACT_SERVER01_EC2_HOST }}
+          username: ${{ env.REACT_SERVER01_EC2_USERNAME }}
           key: ${{ secrets.REACT_SERVER01_EC2_PRIVATE_KEY }}
           script: |
             mkdir -p ~/react
@@ -25,8 +35,8 @@ jobs:
       - name: react폴더내용 ec2서버 react폴더에 업로드 (최신화)
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.REACT_SERVER01_EC2_HOST }}
-          username: ${{ secrets.REACT_SERVER01_EC2_USERNAME }}
+          host: ${{ env.REACT_SERVER01_EC2_HOST }}
+          username: ${{ env.REACT_SERVER01_EC2_USERNAME }}
           key: ${{ secrets.REACT_SERVER01_EC2_PRIVATE_KEY }}
           source: "react/*"
-          target: "~/react/"
+          target: "~/"
