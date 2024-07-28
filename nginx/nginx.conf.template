@@ -10,7 +10,7 @@ server {
     }
 
     location /api/ {
-        # rewrite ^/api/?(.*)$ /$1 break;
+        rewrite ^/api/?(.*)$ /$1 break;
         proxy_pass ${EXPRESS_SERVER01_EC2_PROTOCOL}://${EXPRESS_SERVER01_EC2_HOST}:${EXPRESS_SERVER01_EC2_PORT};
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
