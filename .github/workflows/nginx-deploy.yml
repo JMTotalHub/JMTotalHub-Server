@@ -22,7 +22,6 @@ jobs:
               echo "$line" >> $GITHUB_ENV
             fi
           done
-          cat $GITHUB_ENV  # 로드된 환경 변수를 출력하여 확인
 
       - name: nginx 폴더 생성(있으면 무시)
         uses: appleboy/ssh-action@master
