@@ -59,6 +59,6 @@ jobs:
             export EXPRESS_SERVER01_EC2_PORT=${{ env.EXPRESS_SERVER01_EC2_PORT }}
             # 도커 컴포즈 실행
             cd nginx
-            sudo -E docker-compose pull express 
-            sudo -E docker-compose up -d express  
-            sudo -E docker-compose logs express
+            sudo -E docker-compose pull nginx 
+            sudo -E docker-compose up -d nginx  
+            sudo -E docker-compose logs nginx
