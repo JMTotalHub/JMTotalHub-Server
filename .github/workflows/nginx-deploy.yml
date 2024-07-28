@@ -57,6 +57,8 @@ jobs:
             export EXPRESS_SERVER01_EC2_PROTOCOL=${{ env.EXPRESS_SERVER01_EC2_PROTOCOL }}
             export EXPRESS_SERVER01_EC2_HOST=${{ env.EXPRESS_SERVER01_EC2_HOST }}
             export EXPRESS_SERVER01_EC2_PORT=${{ env.EXPRESS_SERVER01_EC2_PORT }}
+            # nginx.conf 템플릿 파일에서 환경 변수 치환
+            envsubst '\$REACT_SERVER01_EC2_PROTOCOL \$REACT_SERVER01_EC2_HOST \$REACT_SERVER01_EC2_PORT \$EXPRESS_SERVER01_EC2_PROTOCOL \$EXPRESS_SERVER01_EC2_HOST \$EXPRESS_SERVER01_EC2_PORT' < ~/nginx/nginx.conf.template > ~/nginx/nginx.conf
             # 도커 컴포즈 실행
             cd nginx
             sudo -E docker-compose pull nginx 
