@@ -49,7 +49,6 @@ jobs:
           key: ${{ secrets.NGINX_SERVER_EC2_PRIVATE_KEY }}
           script: |
             docker image prune -a -f --filter "until=12h"
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             # React01 환경변수
             export REACT_SERVER01_EC2_PROTOCOL=${{ env.REACT_SERVER01_EC2_PROTOCOL }}
             export REACT_SERVER01_EC2_HOST=${{ env.REACT_SERVER01_EC2_HOST }}
